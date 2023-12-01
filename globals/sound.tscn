@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvbnkiey52uje"]
+
+[ext_resource type="Script" path="res://globals/sound.gd" id="1_euwkp"]
+[ext_resource type="AudioStream" uid="uid://uq2xc2i8kyuj" path="res://sounds/water-splash-big.wav" id="1_nxmtv"]
+
+[node name="Sound" type="Node2D"]
+script = ExtResource("1_euwkp")
+
+[node name="WaterSplash" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_nxmtv")

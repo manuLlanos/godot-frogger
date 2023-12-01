@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cud08iu3lfk56"]
+
+[ext_resource type="Texture2D" uid="uid://j2iywlmdljc" path="res://graphics/frog_placeholder.png" id="1_nmnt4"]
+[ext_resource type="Script" path="res://scenes/frog.gd" id="1_xj8ij"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qdbiu"]
+
+[node name="Frog" type="Area2D"]
+script = ExtResource("1_xj8ij")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_qdbiu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_nmnt4")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 32)
+collide_with_areas = true
+collide_with_bodies = false
