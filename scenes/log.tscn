@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://rxuam8pc4kiv"]
+
+[ext_resource type="PackedScene" uid="uid://cawlhv4cvgvmf" path="res://scenes/moving_object.tscn" id="1_g3565"]
+[ext_resource type="Texture2D" uid="uid://d4i736o2b33gf" path="res://graphics/floating-log-96x32.png" id="2_suo8v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6f2u5"]
+size = Vector2(96, 32)
+
+[node name="Log" instance=ExtResource("1_g3565")]
+collision_layer = 8
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_suo8v")
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("RectangleShape2D_6f2u5")
+
+[node name="VisibleOnScreenNotifier2D" parent="." index="2"]
+position = Vector2(-1.90735e-06, 0)
+scale = Vector2(3.2, 1)

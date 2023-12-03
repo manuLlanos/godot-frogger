@@ -1,13 +1,42 @@
-[gd_scene load_steps=12 format=3 uid="uid://b43vw1tc42iuf"]
+[gd_scene load_steps=24 format=3 uid="uid://b43vw1tc42iuf"]
 
 [ext_resource type="PackedScene" uid="uid://cud08iu3lfk56" path="res://scenes/frog.tscn" id="1_1gr4g"]
 [ext_resource type="Texture2D" uid="uid://dwmh1e7fnb4ik" path="res://graphics/floor-tile.png" id="2_rif31"]
 [ext_resource type="Texture2D" uid="uid://cbge5u0hk2vn1" path="res://graphics/brick-tiles.png" id="2_vimin"]
 [ext_resource type="Texture2D" uid="uid://tkvv1y171pgr" path="res://graphics/road-tileset.png" id="3_bmy57"]
 [ext_resource type="Texture2D" uid="uid://ck3x611n3nym5" path="res://graphics/water-tiles.png" id="4_p78fo"]
+[ext_resource type="Texture2D" uid="uid://b15s20364omy0" path="res://graphics/top-leaves-tiles-32x32.png" id="5_7svm8"]
+[ext_resource type="PackedScene" uid="uid://dweu3tf2d4kr7" path="res://scenes/truck.tscn" id="6_4rtxa"]
+[ext_resource type="PackedScene" uid="uid://c7blctgyq1mov" path="res://scenes/lane.tscn" id="6_y0lpj"]
+[ext_resource type="PackedScene" uid="uid://c0w83wcsf4202" path="res://scenes/car.tscn" id="8_aewfx"]
+[ext_resource type="PackedScene" uid="uid://5ffbjdlwbw2e" path="res://scenes/tractor.tscn" id="8_dqolu"]
+[ext_resource type="PackedScene" uid="uid://cfrgdebd2047n" path="res://scenes/turtle.tscn" id="8_ox22g"]
+[ext_resource type="PackedScene" uid="uid://6wiyst8yspww" path="res://scenes/diving_turtle.tscn" id="9_ovnar"]
+[ext_resource type="PackedScene" uid="uid://blh3kvyy70ga1" path="res://scenes/water.tscn" id="10_3c0vw"]
+[ext_resource type="PackedScene" uid="uid://rxuam8pc4kiv" path="res://scenes/log.tscn" id="11_urxcm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wbuny"]
+size = Vector2(32, 608)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_b345c"]
+resource_name = "Leaves"
+texture = ExtResource("5_7svm8")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+0:0/0/physics_layer_1/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_1/angular_velocity = 0.0
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0/physics_layer_1/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_1/angular_velocity = 0.0
+1:0/0/physics_layer_1/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1cnhv"]
-resource_name = "false"
+resource_name = "Water"
 texture = ExtResource("4_p78fo")
 texture_region_size = Vector2i(32, 32)
 0:0/animation_columns = 2
@@ -16,12 +45,15 @@ texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+0:0/0/physics_layer_1/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_1/angular_velocity = 0.0
 
 [sub_resource type="TileSet" id="TileSet_3deqa"]
 tile_size = Vector2i(32, 32)
-physics_layer_0/collision_layer = 16
+physics_layer_0/collision_layer = 2
+physics_layer_1/collision_layer = 32
 sources/1 = SubResource("TileSetAtlasSource_1cnhv")
+sources/0 = SubResource("TileSetAtlasSource_b345c")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_v2b5j"]
 resource_name = "walkway"
@@ -60,13 +92,35 @@ sources/0 = SubResource("TileSetAtlasSource_v2b5j")
 sources/1 = SubResource("TileSetAtlasSource_sf65s")
 sources/2 = SubResource("TileSetAtlasSource_ttbph")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yfjkc"]
+size = Vector2(800, 192)
+
 [node name="Level" type="Node2D"]
 
-[node name="Water" type="TileMap" parent="."]
+[node name="SideWalls" type="Node2D" parent="."]
+
+[node name="LeftWall" type="StaticBody2D" parent="SideWalls"]
+position = Vector2(-17, 304)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SideWalls/LeftWall"]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_wbuny")
+
+[node name="RightWall" type="StaticBody2D" parent="SideWalls"]
+position = Vector2(816, 304)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SideWalls/RightWall"]
+shape = SubResource("RectangleShape2D_wbuny")
+
+[node name="WaterAndLeaves" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_3deqa")
 format = 2
 layer_0/name = "Water"
 layer_0/tile_data = PackedInt32Array(196608, 1, 0, 262144, 1, 0, 327680, 1, 0, 393216, 1, 0, 196609, 1, 0, 262145, 1, 0, 327681, 1, 0, 393217, 1, 0, 196610, 1, 0, 262146, 1, 0, 327682, 1, 0, 393218, 1, 0, 196611, 1, 0, 262147, 1, 0, 327683, 1, 0, 393219, 1, 0, 0, 1, 0, 65536, 1, 0, 131072, 1, 0, 1, 1, 0, 65537, 1, 0, 131073, 1, 0, 2, 1, 0, 65538, 1, 0, 131074, 1, 0, 3, 1, 0, 65539, 1, 0, 131075, 1, 0, 4, 1, 0, 65540, 1, 0, 131076, 1, 0, 196612, 1, 0, 262148, 1, 0, 327684, 1, 0, 393220, 1, 0, 5, 1, 0, 65541, 1, 0, 131077, 1, 0, 196613, 1, 0, 262149, 1, 0, 327685, 1, 0, 393221, 1, 0, 6, 1, 0, 65542, 1, 0, 131078, 1, 0, 196614, 1, 0, 262150, 1, 0, 327686, 1, 0, 393222, 1, 0, 7, 1, 0, 65543, 1, 0, 131079, 1, 0, 196615, 1, 0, 262151, 1, 0, 327687, 1, 0, 393223, 1, 0, 8, 1, 0, 65544, 1, 0, 131080, 1, 0, 196616, 1, 0, 262152, 1, 0, 327688, 1, 0, 393224, 1, 0, 9, 1, 0, 65545, 1, 0, 131081, 1, 0, 196617, 1, 0, 262153, 1, 0, 327689, 1, 0, 393225, 1, 0, 10, 1, 0, 65546, 1, 0, 131082, 1, 0, 196618, 1, 0, 262154, 1, 0, 327690, 1, 0, 393226, 1, 0, 11, 1, 0, 65547, 1, 0, 131083, 1, 0, 196619, 1, 0, 262155, 1, 0, 327691, 1, 0, 393227, 1, 0, 12, 1, 0, 65548, 1, 0, 131084, 1, 0, 196620, 1, 0, 262156, 1, 0, 327692, 1, 0, 393228, 1, 0, 13, 1, 0, 65549, 1, 0, 131085, 1, 0, 196621, 1, 0, 262157, 1, 0, 327693, 1, 0, 393229, 1, 0, 14, 1, 0, 65550, 1, 0, 131086, 1, 0, 196622, 1, 0, 262158, 1, 0, 327694, 1, 0, 393230, 1, 0, 15, 1, 0, 65551, 1, 0, 131087, 1, 0, 196623, 1, 0, 262159, 1, 0, 327695, 1, 0, 393231, 1, 0, 16, 1, 0, 65552, 1, 0, 131088, 1, 0, 196624, 1, 0, 262160, 1, 0, 327696, 1, 0, 393232, 1, 0, 17, 1, 0, 65553, 1, 0, 131089, 1, 0, 196625, 1, 0, 262161, 1, 0, 327697, 1, 0, 393233, 1, 0, 18, 1, 0, 65554, 1, 0, 131090, 1, 0, 196626, 1, 0, 262162, 1, 0, 327698, 1, 0, 393234, 1, 0, 19, 1, 0, 65555, 1, 0, 131091, 1, 0, 196627, 1, 0, 262163, 1, 0, 327699, 1, 0, 393235, 1, 0, 20, 1, 0, 65556, 1, 0, 131092, 1, 0, 196628, 1, 0, 262164, 1, 0, 327700, 1, 0, 393236, 1, 0, 21, 1, 0, 65557, 1, 0, 131093, 1, 0, 196629, 1, 0, 262165, 1, 0, 327701, 1, 0, 393237, 1, 0, 22, 1, 0, 65558, 1, 0, 131094, 1, 0, 196630, 1, 0, 262166, 1, 0, 327702, 1, 0, 393238, 1, 0, 23, 1, 0, 65559, 1, 0, 131095, 1, 0, 196631, 1, 0, 262167, 1, 0, 327703, 1, 0, 393239, 1, 0, 24, 1, 0, 65560, 1, 0, 131096, 1, 0, 196632, 1, 0, 262168, 1, 0, 327704, 1, 0, 393240, 1, 0)
+layer_1/name = "Leaves"
+layer_1/tile_data = PackedInt32Array(0, 0, 0, 1, 0, 0, 2, 65536, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 65536, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 11, 0, 0, 12, 65536, 0, 13, 0, 0, 14, 0, 0, 15, 0, 0, 16, 0, 0, 17, 65536, 0, 18, 0, 0, 19, 0, 0, 20, 0, 0, 21, 0, 0, 22, 65536, 0, 23, 0, 0, 24, 0, 0)
 
 [node name="GroundTileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_q6utw")
@@ -78,5 +132,243 @@ layer_1/tile_data = PackedInt32Array(1179656, 2, 0, 1179657, 2, 0, 1179658, 2, 0
 layer_2/name = "Road"
 layer_2/tile_data = PackedInt32Array(1048576, 1, 2, 1048577, 1, 2, 1048578, 1, 2, 1048579, 1, 2, 1048580, 1, 2, 1048581, 1, 2, 1048582, 1, 2, 1048583, 1, 2, 1048584, 1, 2, 1048585, 1, 2, 1048586, 1, 2, 1048587, 1, 2, 1048588, 1, 2, 1048589, 1, 2, 1048590, 1, 2, 1048591, 1, 2, 1048592, 1, 2, 1048593, 1, 2, 1048594, 1, 2, 1048595, 1, 2, 1048596, 1, 2, 1048597, 1, 2, 1048598, 1, 2, 1048599, 1, 2, 1048600, 1, 2, 851968, 1, 1, 917504, 1, 1, 983040, 1, 1, 851969, 1, 1, 917505, 1, 1, 983041, 1, 1, 851970, 1, 1, 917506, 1, 1, 983042, 1, 1, 851971, 1, 1, 917507, 1, 1, 983043, 1, 1, 851972, 1, 1, 917508, 1, 1, 983044, 1, 1, 851973, 1, 1, 917509, 1, 1, 983045, 1, 1, 851974, 1, 1, 917510, 1, 1, 983046, 1, 1, 851975, 1, 1, 917511, 1, 1, 983047, 1, 1, 851976, 1, 1, 917512, 1, 1, 983048, 1, 1, 851977, 1, 1, 917513, 1, 1, 983049, 1, 1, 851978, 1, 1, 917514, 1, 1, 983050, 1, 1, 851979, 1, 1, 917515, 1, 1, 983051, 1, 1, 851980, 1, 1, 917516, 1, 1, 983052, 1, 1, 851981, 1, 1, 917517, 1, 1, 983053, 1, 1, 851982, 1, 1, 917518, 1, 1, 983054, 1, 1, 851983, 1, 1, 917519, 1, 1, 983055, 1, 1, 851984, 1, 1, 917520, 1, 1, 983056, 1, 1, 851985, 1, 1, 917521, 1, 1, 983057, 1, 1, 851986, 1, 1, 917522, 1, 1, 983058, 1, 1, 851987, 1, 1, 917523, 1, 1, 983059, 1, 1, 851988, 1, 1, 917524, 1, 1, 983060, 1, 1, 851989, 1, 1, 917525, 1, 1, 983061, 1, 1, 851990, 1, 1, 917526, 1, 1, 983062, 1, 1, 851991, 1, 1, 917527, 1, 1, 983063, 1, 1, 851992, 1, 1, 917528, 1, 1, 983064, 1, 1, 786432, 1, 0, 786433, 1, 0, 786434, 1, 0, 786435, 1, 0, 786436, 1, 0, 786437, 1, 0, 786438, 1, 0, 786439, 1, 0, 786440, 1, 0, 786441, 1, 0, 786442, 1, 0, 786443, 1, 0, 786444, 1, 0, 786445, 1, 0, 786446, 1, 0, 786447, 1, 0, 786448, 1, 0, 786449, 1, 0, 786450, 1, 0, 786451, 1, 0, 786452, 1, 0, 786453, 1, 0, 786454, 1, 0, 786455, 1, 0, 786456, 1, 0, 655360, 1, 2, 655361, 1, 2, 655362, 1, 2, 655363, 1, 2, 655364, 1, 2, 655365, 1, 2, 655366, 1, 2, 655367, 1, 2, 655368, 1, 2, 655369, 1, 2, 655370, 1, 2, 655371, 1, 2, 655372, 1, 2, 655373, 1, 2, 655374, 1, 2, 655375, 1, 2, 655376, 1, 2, 655377, 1, 2, 655378, 1, 2, 655379, 1, 2, 655380, 1, 2, 655381, 1, 2, 655382, 1, 2, 655383, 1, 2, 655384, 1, 2, 589824, 1, 1, 589825, 1, 1, 589826, 1, 1, 589827, 1, 1, 589828, 1, 1, 589829, 1, 1, 589830, 1, 1, 589831, 1, 1, 589832, 1, 1, 589833, 1, 1, 589834, 1, 1, 589835, 1, 1, 589836, 1, 1, 589837, 1, 1, 589838, 1, 1, 589839, 1, 1, 589840, 1, 1, 589841, 1, 1, 589842, 1, 1, 589843, 1, 1, 589844, 1, 1, 589845, 1, 1, 589846, 1, 1, 589847, 1, 1, 589848, 1, 1, 524288, 1, 0, 524289, 1, 0, 524290, 1, 0, 524291, 1, 0, 524292, 1, 0, 524293, 1, 0, 524294, 1, 0, 524295, 1, 0, 524296, 1, 0, 524297, 1, 0, 524298, 1, 0, 524299, 1, 0, 524300, 1, 0, 524301, 1, 0, 524302, 1, 0, 524303, 1, 0, 524304, 1, 0, 524305, 1, 0, 524306, 1, 0, 524307, 1, 0, 524308, 1, 0, 524309, 1, 0, 524310, 1, 0, 524311, 1, 0, 524312, 1, 0)
 
+[node name="WaterLanes" type="Node2D" parent="."]
+
+[node name="Lane" parent="WaterLanes" instance=ExtResource("6_y0lpj")]
+position = Vector2(-16, 208)
+direction = Vector2(1, 0)
+
+[node name="Log" parent="WaterLanes/Lane" instance=ExtResource("11_urxcm")]
+position = Vector2(96, 0)
+
+[node name="Log2" parent="WaterLanes/Lane" instance=ExtResource("11_urxcm")]
+position = Vector2(288, 0)
+
+[node name="Log3" parent="WaterLanes/Lane" instance=ExtResource("11_urxcm")]
+position = Vector2(592, 0)
+
+[node name="Lane2" parent="WaterLanes" instance=ExtResource("6_y0lpj")]
+position = Vector2(816, 176)
+move_time = 0.4
+
+[node name="Log2" parent="WaterLanes/Lane2" instance=ExtResource("11_urxcm")]
+position = Vector2(-640, 0)
+
+[node name="Log3" parent="WaterLanes/Lane2" instance=ExtResource("11_urxcm")]
+position = Vector2(-240, 0)
+
+[node name="Log4" parent="WaterLanes/Lane2" instance=ExtResource("11_urxcm")]
+position = Vector2(-416, 0)
+
+[node name="Lane3" parent="WaterLanes" instance=ExtResource("6_y0lpj")]
+position = Vector2(-16, 144)
+direction = Vector2(1, 0)
+move_time = 0.6
+
+[node name="Turtle" parent="WaterLanes/Lane3" instance=ExtResource("8_ox22g")]
+position = Vector2(64, 0)
+
+[node name="Turtle2" parent="WaterLanes/Lane3" instance=ExtResource("8_ox22g")]
+position = Vector2(96, 0)
+
+[node name="Turtle3" parent="WaterLanes/Lane3" instance=ExtResource("8_ox22g")]
+position = Vector2(128, 0)
+
+[node name="Turtle4" parent="WaterLanes/Lane3" instance=ExtResource("8_ox22g")]
+position = Vector2(224, 0)
+
+[node name="Turtle5" parent="WaterLanes/Lane3" instance=ExtResource("8_ox22g")]
+position = Vector2(256, 0)
+
+[node name="Turtle6" parent="WaterLanes/Lane3" instance=ExtResource("8_ox22g")]
+position = Vector2(288, 0)
+
+[node name="DivingTurtle" parent="WaterLanes/Lane3" instance=ExtResource("9_ovnar")]
+position = Vector2(416, 0)
+
+[node name="DivingTurtle2" parent="WaterLanes/Lane3" instance=ExtResource("9_ovnar")]
+position = Vector2(448, 0)
+
+[node name="DivingTurtle3" parent="WaterLanes/Lane3" instance=ExtResource("9_ovnar")]
+position = Vector2(480, 0)
+
 [node name="Frog" parent="." instance=ExtResource("1_1gr4g")]
 position = Vector2(400, 560)
+
+[node name="Lanes" type="Node2D" parent="."]
+
+[node name="Lane" parent="Lanes" instance=ExtResource("6_y0lpj")]
+position = Vector2(816, 528)
+move_time = 0.3
+
+[node name="Car" parent="Lanes/Lane" instance=ExtResource("8_aewfx")]
+position = Vector2(-320, 0)
+rotation = 3.14159
+
+[node name="Car2" parent="Lanes/Lane" instance=ExtResource("8_aewfx")]
+position = Vector2(-192, 0)
+rotation = 3.14159
+
+[node name="Car3" parent="Lanes/Lane" instance=ExtResource("8_aewfx")]
+position = Vector2(-96, 0)
+rotation = 3.14159
+
+[node name="Car4" parent="Lanes/Lane" instance=ExtResource("8_aewfx")]
+position = Vector2(-512, 0)
+rotation = 3.14159
+
+[node name="Car5" parent="Lanes/Lane" instance=ExtResource("8_aewfx")]
+position = Vector2(-624, 0)
+rotation = 3.14159
+
+[node name="Car6" parent="Lanes/Lane" instance=ExtResource("8_aewfx")]
+position = Vector2(-768, 0)
+rotation = 3.14159
+
+[node name="Lane2" parent="Lanes" instance=ExtResource("6_y0lpj")]
+position = Vector2(-16, 496)
+direction = Vector2(1, 0)
+move_time = 0.4
+
+[node name="Car" parent="Lanes/Lane2" instance=ExtResource("8_aewfx")]
+position = Vector2(96, 0)
+
+[node name="Car2" parent="Lanes/Lane2" instance=ExtResource("8_aewfx")]
+position = Vector2(192, 0)
+
+[node name="Car3" parent="Lanes/Lane2" instance=ExtResource("8_aewfx")]
+position = Vector2(352, 0)
+
+[node name="Car4" parent="Lanes/Lane2" instance=ExtResource("8_aewfx")]
+position = Vector2(448, 0)
+
+[node name="Car5" parent="Lanes/Lane2" instance=ExtResource("8_aewfx")]
+position = Vector2(544, 0)
+
+[node name="Car6" parent="Lanes/Lane2" instance=ExtResource("8_aewfx")]
+position = Vector2(672, 0)
+
+[node name="Car7" parent="Lanes/Lane2" instance=ExtResource("8_aewfx")]
+position = Vector2(800, 0)
+
+[node name="Lane3" parent="Lanes" instance=ExtResource("6_y0lpj")]
+position = Vector2(-16, 464)
+direction = Vector2(1, 0)
+move_time = 0.6
+
+[node name="Tractor" parent="Lanes/Lane3" instance=ExtResource("8_dqolu")]
+position = Vector2(64, 0)
+
+[node name="Tractor2" parent="Lanes/Lane3" instance=ExtResource("8_dqolu")]
+position = Vector2(192, 0)
+
+[node name="Tractor3" parent="Lanes/Lane3" instance=ExtResource("8_dqolu")]
+position = Vector2(416, 0)
+
+[node name="Tractor4" parent="Lanes/Lane3" instance=ExtResource("8_dqolu")]
+position = Vector2(656, 0)
+
+[node name="Lane4" parent="Lanes" instance=ExtResource("6_y0lpj")]
+position = Vector2(816, 432)
+move_time = 0.4
+
+[node name="Truck" parent="Lanes/Lane4" instance=ExtResource("6_4rtxa")]
+position = Vector2(-256, 0)
+
+[node name="Truck2" parent="Lanes/Lane4" instance=ExtResource("6_4rtxa")]
+position = Vector2(-608, 0)
+
+[node name="Truck3" parent="Lanes/Lane4" instance=ExtResource("6_4rtxa")]
+position = Vector2(-448, 0)
+
+[node name="Lane5" parent="Lanes" instance=ExtResource("6_y0lpj")]
+position = Vector2(816, 400)
+move_time = 0.3
+
+[node name="Truck" parent="Lanes/Lane5" instance=ExtResource("6_4rtxa")]
+position = Vector2(-288, 0)
+
+[node name="Truck4" parent="Lanes/Lane5" instance=ExtResource("6_4rtxa")]
+position = Vector2(-96, 0)
+
+[node name="Truck2" parent="Lanes/Lane5" instance=ExtResource("6_4rtxa")]
+position = Vector2(-688, 0)
+
+[node name="Truck3" parent="Lanes/Lane5" instance=ExtResource("6_4rtxa")]
+position = Vector2(-496, 0)
+
+[node name="Lane6" parent="Lanes" instance=ExtResource("6_y0lpj")]
+position = Vector2(-16, 336)
+direction = Vector2(1, 0)
+move_time = 0.7
+
+[node name="Tractor" parent="Lanes/Lane6" instance=ExtResource("8_dqolu")]
+position = Vector2(128, 0)
+
+[node name="Tractor7" parent="Lanes/Lane6" instance=ExtResource("8_dqolu")]
+position = Vector2(128, 0)
+
+[node name="Tractor2" parent="Lanes/Lane6" instance=ExtResource("8_dqolu")]
+position = Vector2(256, 0)
+
+[node name="Tractor3" parent="Lanes/Lane6" instance=ExtResource("8_dqolu")]
+position = Vector2(384, 0)
+
+[node name="Tractor4" parent="Lanes/Lane6" instance=ExtResource("8_dqolu")]
+position = Vector2(512, 0)
+
+[node name="Tractor5" parent="Lanes/Lane6" instance=ExtResource("8_dqolu")]
+position = Vector2(624, 0)
+
+[node name="Tractor6" parent="Lanes/Lane6" instance=ExtResource("8_dqolu")]
+position = Vector2(752, 0)
+
+[node name="Lane7" parent="Lanes" instance=ExtResource("6_y0lpj")]
+position = Vector2(816, 304)
+move_time = 0.2
+
+[node name="Car" parent="Lanes/Lane7" instance=ExtResource("8_aewfx")]
+position = Vector2(-32, 0)
+rotation = -3.14159
+
+[node name="Car2" parent="Lanes/Lane7" instance=ExtResource("8_aewfx")]
+position = Vector2(-192, 0)
+rotation = -3.14159
+
+[node name="Car3" parent="Lanes/Lane7" instance=ExtResource("8_aewfx")]
+position = Vector2(-320, 0)
+rotation = -3.14159
+
+[node name="Car4" parent="Lanes/Lane7" instance=ExtResource("8_aewfx")]
+position = Vector2(-448, 0)
+rotation = -3.14159
+
+[node name="Car5" parent="Lanes/Lane7" instance=ExtResource("8_aewfx")]
+position = Vector2(-608, 0)
+rotation = -3.14159
+
+[node name="Car6" parent="Lanes/Lane7" instance=ExtResource("8_aewfx")]
+position = Vector2(-736, 0)
+rotation = -3.14159
+
+[node name="Lane8" parent="Lanes" instance=ExtResource("6_y0lpj")]
+position = Vector2(816, 272)
+
+[node name="Truck" parent="Lanes/Lane8" instance=ExtResource("6_4rtxa")]
+position = Vector2(-160, 0)
+
+[node name="Truck2" parent="Lanes/Lane8" instance=ExtResource("6_4rtxa")]
+position = Vector2(-352, 0)
+
+[node name="Truck3" parent="Lanes/Lane8" instance=ExtResource("6_4rtxa")]
+position = Vector2(-640, 0)
+
+[node name="Water" parent="." instance=ExtResource("10_3c0vw")]
+visible = false
+position = Vector2(384, 128)
+
+[node name="CollisionShape2D" parent="Water" index="0"]
+position = Vector2(16, 0)
+shape = SubResource("RectangleShape2D_yfjkc")
+
+[editable path="Water"]

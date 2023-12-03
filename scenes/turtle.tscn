@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfrgdebd2047n"]
+
+[ext_resource type="PackedScene" uid="uid://cawlhv4cvgvmf" path="res://scenes/moving_object.tscn" id="1_nwfoc"]
+[ext_resource type="Texture2D" uid="uid://demn22dj553t" path="res://graphics/turtle-32x32.png" id="2_pn55x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j6s7c"]
+size = Vector2(32, 32)
+
+[node name="Turtle" instance=ExtResource("1_nwfoc")]
+collision_layer = 8
+
+[node name="Sprite2D" parent="." index="0"]
+rotation = 1.5708
+texture = ExtResource("2_pn55x")
+hframes = 3
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("RectangleShape2D_j6s7c")
+
+[node name="VisibleOnScreenNotifier2D" parent="." index="2"]
+scale = Vector2(1.6, 1.6)

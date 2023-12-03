@@ -1,10 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://cvbnkiey52uje"]
+[gd_scene load_steps=4 format=3 uid="uid://cvbnkiey52uje"]
 
 [ext_resource type="Script" path="res://globals/sound.gd" id="1_euwkp"]
 [ext_resource type="AudioStream" uid="uid://uq2xc2i8kyuj" path="res://sounds/water-splash-big.wav" id="1_nxmtv"]
+[ext_resource type="AudioStream" uid="uid://f5l2e1f7c3aa" path="res://sounds/bodysplat.wav" id="3_quwt3"]
 
 [node name="Sound" type="Node2D"]
 script = ExtResource("1_euwkp")
 
 [node name="WaterSplash" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_nxmtv")
+
+[node name="BodySplat" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_quwt3")
+volume_db = -5.0

@@ -1,0 +1,61 @@
+[gd_scene load_steps=6 format=3 uid="uid://6wiyst8yspww"]
+
+[ext_resource type="PackedScene" uid="uid://cawlhv4cvgvmf" path="res://scenes/moving_object.tscn" id="1_4apk8"]
+[ext_resource type="Texture2D" uid="uid://demn22dj553t" path="res://graphics/turtle-32x32.png" id="2_6fue3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_83rhx"]
+size = Vector2(32, 32)
+
+[sub_resource type="Animation" id="Animation_mkr0r"]
+resource_name = "Dive_and_rise"
+length = 6.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 3, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3, 5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4v7xi"]
+_data = {
+"Dive_and_rise": SubResource("Animation_mkr0r")
+}
+
+[node name="DivingTurtle" instance=ExtResource("1_4apk8")]
+collision_layer = 8
+
+[node name="Sprite2D" parent="." index="0"]
+rotation = 1.5708
+texture = ExtResource("2_6fue3")
+hframes = 3
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("RectangleShape2D_83rhx")
+
+[node name="VisibleOnScreenNotifier2D" parent="." index="2"]
+scale = Vector2(1.6, 1.6)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
+libraries = {
+"": SubResource("AnimationLibrary_4v7xi")
+}
+autoplay = "Dive_and_rise"

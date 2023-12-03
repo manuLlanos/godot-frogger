@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://5ffbjdlwbw2e"]
+
+[ext_resource type="PackedScene" uid="uid://cawlhv4cvgvmf" path="res://scenes/moving_object.tscn" id="1_0v28d"]
+[ext_resource type="Texture2D" uid="uid://yoekre3o8hh2" path="res://graphics/long-car-64x32.png" id="2_iq8k3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yhfd4"]
+size = Vector2(50, 20)
+
+[node name="Tractor" groups=["Vehicles"] instance=ExtResource("1_0v28d")]
+collision_layer = 4
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(-16, 0)
+texture = ExtResource("2_iq8k3")
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(-15, 0)
+shape = SubResource("RectangleShape2D_yhfd4")
+
+[node name="VisibleOnScreenNotifier2D" parent="." index="2"]
+position = Vector2(-11, 0)
+scale = Vector2(2.1, 1)

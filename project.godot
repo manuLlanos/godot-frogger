@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Sound="*res://globals/sound.tscn"
+Globals="*res://globals/globals.gd"
 
 [display]
 
@@ -59,9 +60,10 @@ right={
 
 2d_physics/layer_1="Player"
 2d_physics/layer_2="Walls"
-2d_physics/layer_3="Vehicles"
+2d_physics/layer_3="Enemies"
 2d_physics/layer_4="Surfaces"
 2d_physics/layer_5="Water"
+2d_physics/layer_6="WinSpot"
 
 [rendering]
 
