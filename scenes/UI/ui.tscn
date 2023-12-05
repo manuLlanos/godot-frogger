@@ -1,0 +1,160 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0qlomgu7rq8v"]
+
+[ext_resource type="Script" path="res://scenes/UI/ui.gd" id="1_qy7we"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_n0eg7"]
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_qy7we")
+
+[node name="LivesContainer" type="MarginContainer" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 53.0
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LivesContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="LivesContainer/HBoxContainer"]
+layout_mode = 2
+text = "Lives"
+
+[node name="LivesNumber" type="Label" parent="LivesContainer/HBoxContainer"]
+layout_mode = 2
+text = "2"
+horizontal_alignment = 2
+
+[node name="ScoreContainer" type="MarginContainer" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -53.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScoreContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScoreContainer/HBoxContainer"]
+layout_mode = 2
+text = "Score
+"
+
+[node name="ScoreNumber" type="Label" parent="ScoreContainer/HBoxContainer"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 2
+
+[node name="HighscoreContainer" type="MarginContainer" parent="."]
+offset_right = 57.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HighscoreContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HighscoreContainer/HBoxContainer"]
+layout_mode = 2
+text = "Highscore"
+
+[node name="HighscoreNumber" type="Label" parent="HighscoreContainer/HBoxContainer"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 2
+
+[node name="GameOverContainer" type="MarginContainer" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOverContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GameOverContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "GAME OVER"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="GameOverContainer/VBoxContainer"]
+layout_mode = 2
+text = "Press R to restart"
+horizontal_alignment = 1
+
+[node name="GameWonContainer" type="MarginContainer" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = -33.0
+offset_right = 67.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="GameWonContainer"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+texture = SubResource("CanvasTexture_n0eg7")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameWonContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GameWonContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "YOU WIN!"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="GameWonContainer/VBoxContainer"]
+layout_mode = 2
+text = "Final score"
+horizontal_alignment = 1
+
+[node name="FinalScoreLabel" type="Label" parent="GameWonContainer/VBoxContainer"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="GameWonContainer/VBoxContainer"]
+layout_mode = 2
+text = "Press R to start
+ new game"
+horizontal_alignment = 1
+
+[node name="TimerContainer" type="MarginContainer" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -163.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = -40
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TimerContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TimerContainer/HBoxContainer"]
+layout_mode = 2
+text = "Time"
+
+[node name="TimeLeft" type="Label" parent="TimerContainer/HBoxContainer"]
+layout_mode = 2
+text = "40"

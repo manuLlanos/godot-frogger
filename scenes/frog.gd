@@ -1,5 +1,5 @@
 extends Area2D
-
+class_name Frog
 
 @onready var ray: RayCast2D = $RayCast2D
 
@@ -9,6 +9,8 @@ extends Area2D
 ##More is faster
 @export var animation_speed: float = 8.0
 
+
+var tween: Tween
 
 var inputs = {
 	"left": Vector2.LEFT,
@@ -30,23 +32,32 @@ func move(dir):
 	ray.force_raycast_update()
 	if not ray.is_colliding():
 		#position += inputs[dir] * TILE_SIZE
-		var tween = create_tween()
+		tween = create_tween()
 		tween.tween_property(self, "position",
 		 position + inputs[dir] * Globals.TILE_SIZE, 1.0/animation_speed).set_trans(Tween.TRANS_SINE)
 		moving = true
 		await tween.finished
 		moving = false
 
-func _process(_delta):
+func teleport_to(pos):
+	tween.stop()
+	moving = false
+	position = pos
+
+func _process(delta):
 	#cheap solution to check for drowning/leaving logs into water
 	# i just want to get this game done lmao
 	if alive:
 		var overlapping_areas: Array = get_overlapping_areas()
 		if overlapping_areas.size() == 0:
 			return
-			# if NONE of the areas is NOT water
+		# if the only overlapping area is water, drown
 		if ! overlapping_areas.any(func(x): return !(x is Water)):
 			drown()
+		elif not moving:
+			for area in overlapping_areas:
+				if ! area is Water:
+					position += area.velocity * delta
 
 func _on_area_entered(area):
 	if alive and area.is_in_group("Vehicles"):
@@ -54,6 +65,7 @@ func _on_area_entered(area):
 
 func hit():
 	alive = false
+	Globals.lives -= 1
 	$AnimationPlayer.play("death")
 
 func splat():
@@ -63,5 +75,6 @@ func splat():
 
 func drown():
 	$Particles/WaterSplash.emitting = true
+	z_index = -1
 	Sound.play("WaterSplash")
 	hit()

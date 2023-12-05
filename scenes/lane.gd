@@ -6,5 +6,5 @@ class_name Lane
 
 ## Direction the vehicles on this lane will always follow
 @export var direction: Vector2 = Vector2.LEFT
-## The time in seconds between every move
-@export var move_time: float = 0.5
+## The speed of the objects on this lane
+@export var speed: float = 100

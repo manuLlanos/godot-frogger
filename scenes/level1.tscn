@@ -1,0 +1,373 @@
+[gd_scene load_steps=13 format=3 uid="uid://d015ueqp2ah0x"]
+
+[ext_resource type="PackedScene" uid="uid://b43vw1tc42iuf" path="res://scenes/level.tscn" id="1_ukdm1"]
+[ext_resource type="PackedScene" uid="uid://wuhn41rv54nn" path="res://scenes/lily_pad.tscn" id="2_hols3"]
+[ext_resource type="Script" path="res://scenes/level1.gd" id="2_xpykb"]
+[ext_resource type="PackedScene" uid="uid://c7blctgyq1mov" path="res://scenes/lane.tscn" id="3_5yu6c"]
+[ext_resource type="PackedScene" uid="uid://rxuam8pc4kiv" path="res://scenes/log.tscn" id="4_dqu3x"]
+[ext_resource type="PackedScene" uid="uid://cfrgdebd2047n" path="res://scenes/turtle.tscn" id="5_orwcl"]
+[ext_resource type="PackedScene" uid="uid://6wiyst8yspww" path="res://scenes/diving_turtle.tscn" id="6_8xx7c"]
+[ext_resource type="PackedScene" uid="uid://c0w83wcsf4202" path="res://scenes/car.tscn" id="8_y7p5l"]
+[ext_resource type="PackedScene" uid="uid://5ffbjdlwbw2e" path="res://scenes/tractor.tscn" id="9_8caoj"]
+[ext_resource type="PackedScene" uid="uid://dweu3tf2d4kr7" path="res://scenes/truck.tscn" id="10_q032p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n085i"]
+size = Vector2(32, 608)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_atppq"]
+size = Vector2(800, 192)
+
+[node name="Level1" instance=ExtResource("1_ukdm1")]
+script = ExtResource("2_xpykb")
+
+[node name="LeftWall" type="StaticBody2D" parent="SideWalls" index="0"]
+position = Vector2(-17, 304)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SideWalls/LeftWall" index="0"]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_n085i")
+
+[node name="RightWall" type="StaticBody2D" parent="SideWalls" index="1"]
+position = Vector2(816, 304)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SideWalls/RightWall" index="0"]
+shape = SubResource("RectangleShape2D_n085i")
+
+[node name="LilyPad" parent="LilyPads" index="0" instance=ExtResource("2_hols3")]
+position = Vector2(80, 16)
+
+[node name="LilyPad2" parent="LilyPads" index="1" instance=ExtResource("2_hols3")]
+position = Vector2(240, 16)
+
+[node name="LilyPad3" parent="LilyPads" index="2" instance=ExtResource("2_hols3")]
+position = Vector2(400, 16)
+
+[node name="LilyPad4" parent="LilyPads" index="3" instance=ExtResource("2_hols3")]
+position = Vector2(560, 16)
+
+[node name="LilyPad5" parent="LilyPads" index="4" instance=ExtResource("2_hols3")]
+position = Vector2(720, 16)
+
+[node name="Lane" parent="WaterLanes" index="0" instance=ExtResource("3_5yu6c")]
+position = Vector2(-16, 208)
+direction = Vector2(1, 0)
+speed = 60.0
+
+[node name="Log" parent="WaterLanes/Lane" index="0" instance=ExtResource("4_dqu3x")]
+position = Vector2(96, 0)
+
+[node name="Log2" parent="WaterLanes/Lane" index="1" instance=ExtResource("4_dqu3x")]
+position = Vector2(288, 0)
+
+[node name="Log3" parent="WaterLanes/Lane" index="2" instance=ExtResource("4_dqu3x")]
+position = Vector2(592, 0)
+
+[node name="Lane2" parent="WaterLanes" index="1" instance=ExtResource("3_5yu6c")]
+position = Vector2(816, 176)
+speed = 70.0
+
+[node name="Log2" parent="WaterLanes/Lane2" index="0" instance=ExtResource("4_dqu3x")]
+position = Vector2(-640, 0)
+
+[node name="Log3" parent="WaterLanes/Lane2" index="1" instance=ExtResource("4_dqu3x")]
+position = Vector2(-240, 0)
+
+[node name="Log4" parent="WaterLanes/Lane2" index="2" instance=ExtResource("4_dqu3x")]
+position = Vector2(-416, 0)
+
+[node name="Lane3" parent="WaterLanes" index="2" instance=ExtResource("3_5yu6c")]
+position = Vector2(-16, 144)
+direction = Vector2(1, 0)
+speed = 80.0
+
+[node name="Turtle" parent="WaterLanes/Lane3" index="0" instance=ExtResource("5_orwcl")]
+position = Vector2(64, 0)
+
+[node name="Turtle2" parent="WaterLanes/Lane3" index="1" instance=ExtResource("5_orwcl")]
+position = Vector2(96, 0)
+
+[node name="Turtle3" parent="WaterLanes/Lane3" index="2" instance=ExtResource("5_orwcl")]
+position = Vector2(128, 0)
+
+[node name="Turtle4" parent="WaterLanes/Lane3" index="3" instance=ExtResource("5_orwcl")]
+position = Vector2(672, 0)
+
+[node name="Turtle5" parent="WaterLanes/Lane3" index="4" instance=ExtResource("5_orwcl")]
+position = Vector2(256, 0)
+
+[node name="Turtle8" parent="WaterLanes/Lane3" index="5" instance=ExtResource("5_orwcl")]
+position = Vector2(288, 0)
+
+[node name="Turtle6" parent="WaterLanes/Lane3" index="6" instance=ExtResource("5_orwcl")]
+position = Vector2(736, 0)
+
+[node name="Turtle7" parent="WaterLanes/Lane3" index="7" instance=ExtResource("5_orwcl")]
+position = Vector2(704, 0)
+
+[node name="DivingTurtle" parent="WaterLanes/Lane3" index="8" instance=ExtResource("6_8xx7c")]
+position = Vector2(416, 0)
+
+[node name="DivingTurtle2" parent="WaterLanes/Lane3" index="9" instance=ExtResource("6_8xx7c")]
+position = Vector2(448, 0)
+
+[node name="DivingTurtle3" parent="WaterLanes/Lane3" index="10" instance=ExtResource("6_8xx7c")]
+position = Vector2(480, 0)
+
+[node name="Lane4" parent="WaterLanes" index="3" instance=ExtResource("3_5yu6c")]
+position = Vector2(816, 112)
+speed = 60.0
+
+[node name="Log" parent="WaterLanes/Lane4" index="0" instance=ExtResource("4_dqu3x")]
+position = Vector2(-128, 0)
+
+[node name="Log2" parent="WaterLanes/Lane4" index="1" instance=ExtResource("4_dqu3x")]
+position = Vector2(-320, 0)
+
+[node name="Log3" parent="WaterLanes/Lane4" index="2" instance=ExtResource("4_dqu3x")]
+position = Vector2(-704, 0)
+
+[node name="Log4" parent="WaterLanes/Lane4" index="3" instance=ExtResource("4_dqu3x")]
+position = Vector2(-320, 0)
+
+[node name="Log5" parent="WaterLanes/Lane4" index="4" instance=ExtResource("4_dqu3x")]
+position = Vector2(-512, 0)
+
+[node name="Lane5" parent="WaterLanes" index="4" instance=ExtResource("3_5yu6c")]
+position = Vector2(-16, 80)
+direction = Vector2(1, 0)
+speed = 60.0
+
+[node name="Turtle" parent="WaterLanes/Lane5" index="0" instance=ExtResource("5_orwcl")]
+position = Vector2(544, 0)
+rotation = 6.28318
+
+[node name="Turtle8" parent="WaterLanes/Lane5" index="1" instance=ExtResource("5_orwcl")]
+position = Vector2(672, 0)
+rotation = 6.28318
+
+[node name="Turtle7" parent="WaterLanes/Lane5" index="2" instance=ExtResource("5_orwcl")]
+position = Vector2(704, 0)
+rotation = 6.28318
+
+[node name="Turtle2" parent="WaterLanes/Lane5" index="3" instance=ExtResource("5_orwcl")]
+position = Vector2(512, 0)
+rotation = 6.28318
+
+[node name="Turtle3" parent="WaterLanes/Lane5" index="4" instance=ExtResource("5_orwcl")]
+position = Vector2(480, 0)
+rotation = 6.28318
+
+[node name="Turtle4" parent="WaterLanes/Lane5" index="5" instance=ExtResource("5_orwcl")]
+position = Vector2(128, 0)
+rotation = 6.28318
+
+[node name="Turtle5" parent="WaterLanes/Lane5" index="6" instance=ExtResource("5_orwcl")]
+position = Vector2(96, 0)
+rotation = 6.28318
+
+[node name="Turtle6" parent="WaterLanes/Lane5" index="7" instance=ExtResource("5_orwcl")]
+position = Vector2(64, 0)
+rotation = 6.28318
+
+[node name="DivingTurtle" parent="WaterLanes/Lane5" index="8" instance=ExtResource("6_8xx7c")]
+position = Vector2(256, 0)
+
+[node name="DivingTurtle2" parent="WaterLanes/Lane5" index="9" instance=ExtResource("6_8xx7c")]
+position = Vector2(288, 0)
+
+[node name="DivingTurtle3" parent="WaterLanes/Lane5" index="10" instance=ExtResource("6_8xx7c")]
+position = Vector2(320, 0)
+
+[node name="Lane6" parent="WaterLanes" index="5" instance=ExtResource("3_5yu6c")]
+position = Vector2(-16, 48)
+direction = Vector2(1, 0)
+speed = 30.0
+
+[node name="Log" parent="WaterLanes/Lane6" index="0" instance=ExtResource("4_dqu3x")]
+position = Vector2(128, 0)
+
+[node name="Log2" parent="WaterLanes/Lane6" index="1" instance=ExtResource("4_dqu3x")]
+position = Vector2(448, 0)
+
+[node name="Log3" parent="WaterLanes/Lane6" index="2" instance=ExtResource("4_dqu3x")]
+position = Vector2(704, 0)
+
+[node name="Lane" parent="Lanes" index="0" instance=ExtResource("3_5yu6c")]
+position = Vector2(816, 528)
+
+[node name="Car" parent="Lanes/Lane" index="0" instance=ExtResource("8_y7p5l")]
+position = Vector2(-320, 0)
+rotation = 3.14159
+
+[node name="Car2" parent="Lanes/Lane" index="1" instance=ExtResource("8_y7p5l")]
+position = Vector2(-192, 0)
+rotation = 3.14159
+
+[node name="Car3" parent="Lanes/Lane" index="2" instance=ExtResource("8_y7p5l")]
+position = Vector2(-96, 0)
+rotation = 3.14159
+
+[node name="Car4" parent="Lanes/Lane" index="3" instance=ExtResource("8_y7p5l")]
+position = Vector2(-512, 0)
+rotation = 3.14159
+
+[node name="Car5" parent="Lanes/Lane" index="4" instance=ExtResource("8_y7p5l")]
+position = Vector2(-624, 0)
+rotation = 3.14159
+
+[node name="Car6" parent="Lanes/Lane" index="5" instance=ExtResource("8_y7p5l")]
+position = Vector2(-768, 0)
+rotation = 3.14159
+
+[node name="Lane2" parent="Lanes" index="1" instance=ExtResource("3_5yu6c")]
+position = Vector2(-16, 496)
+direction = Vector2(1, 0)
+speed = 120.0
+
+[node name="Car" parent="Lanes/Lane2" index="0" instance=ExtResource("8_y7p5l")]
+position = Vector2(96, 0)
+
+[node name="Car2" parent="Lanes/Lane2" index="1" instance=ExtResource("8_y7p5l")]
+position = Vector2(192, 0)
+
+[node name="Car3" parent="Lanes/Lane2" index="2" instance=ExtResource("8_y7p5l")]
+position = Vector2(352, 0)
+
+[node name="Car4" parent="Lanes/Lane2" index="3" instance=ExtResource("8_y7p5l")]
+position = Vector2(448, 0)
+
+[node name="Car5" parent="Lanes/Lane2" index="4" instance=ExtResource("8_y7p5l")]
+position = Vector2(544, 0)
+
+[node name="Car6" parent="Lanes/Lane2" index="5" instance=ExtResource("8_y7p5l")]
+position = Vector2(672, 0)
+
+[node name="Car7" parent="Lanes/Lane2" index="6" instance=ExtResource("8_y7p5l")]
+position = Vector2(800, 0)
+
+[node name="Lane3" parent="Lanes" index="2" instance=ExtResource("3_5yu6c")]
+position = Vector2(-16, 464)
+direction = Vector2(1, 0)
+speed = 60.0
+
+[node name="Tractor" parent="Lanes/Lane3" index="0" instance=ExtResource("9_8caoj")]
+position = Vector2(64, 0)
+
+[node name="Tractor2" parent="Lanes/Lane3" index="1" instance=ExtResource("9_8caoj")]
+position = Vector2(192, 0)
+
+[node name="Tractor3" parent="Lanes/Lane3" index="2" instance=ExtResource("9_8caoj")]
+position = Vector2(416, 0)
+
+[node name="Tractor4" parent="Lanes/Lane3" index="3" instance=ExtResource("9_8caoj")]
+position = Vector2(656, 0)
+
+[node name="Lane4" parent="Lanes" index="3" instance=ExtResource("3_5yu6c")]
+position = Vector2(816, 432)
+speed = 80.0
+
+[node name="Truck" parent="Lanes/Lane4" index="0" instance=ExtResource("10_q032p")]
+position = Vector2(-256, 0)
+
+[node name="Truck2" parent="Lanes/Lane4" index="1" instance=ExtResource("10_q032p")]
+position = Vector2(-608, 0)
+
+[node name="Truck3" parent="Lanes/Lane4" index="2" instance=ExtResource("10_q032p")]
+position = Vector2(-448, 0)
+
+[node name="Lane5" parent="Lanes" index="4" instance=ExtResource("3_5yu6c")]
+position = Vector2(816, 400)
+speed = 40.0
+
+[node name="Truck" parent="Lanes/Lane5" index="0" instance=ExtResource("10_q032p")]
+position = Vector2(-288, 0)
+
+[node name="Truck4" parent="Lanes/Lane5" index="1" instance=ExtResource("10_q032p")]
+position = Vector2(-96, 0)
+
+[node name="Truck2" parent="Lanes/Lane5" index="2" instance=ExtResource("10_q032p")]
+position = Vector2(-688, 0)
+
+[node name="Truck3" parent="Lanes/Lane5" index="3" instance=ExtResource("10_q032p")]
+position = Vector2(-496, 0)
+
+[node name="Lane6" parent="Lanes" index="5" instance=ExtResource("3_5yu6c")]
+position = Vector2(-16, 336)
+direction = Vector2(1, 0)
+speed = 50.0
+
+[node name="Tractor" parent="Lanes/Lane6" index="0" instance=ExtResource("9_8caoj")]
+position = Vector2(128, 0)
+
+[node name="Tractor7" parent="Lanes/Lane6" index="1" instance=ExtResource("9_8caoj")]
+position = Vector2(128, 0)
+
+[node name="Tractor2" parent="Lanes/Lane6" index="2" instance=ExtResource("9_8caoj")]
+position = Vector2(256, 0)
+
+[node name="Tractor3" parent="Lanes/Lane6" index="3" instance=ExtResource("9_8caoj")]
+position = Vector2(384, 0)
+
+[node name="Tractor4" parent="Lanes/Lane6" index="4" instance=ExtResource("9_8caoj")]
+position = Vector2(512, 0)
+
+[node name="Tractor5" parent="Lanes/Lane6" index="5" instance=ExtResource("9_8caoj")]
+position = Vector2(624, 0)
+
+[node name="Tractor6" parent="Lanes/Lane6" index="6" instance=ExtResource("9_8caoj")]
+position = Vector2(752, 0)
+
+[node name="Lane7" parent="Lanes" index="6" instance=ExtResource("3_5yu6c")]
+position = Vector2(816, 304)
+
+[node name="Car" parent="Lanes/Lane7" index="0" instance=ExtResource("8_y7p5l")]
+position = Vector2(-32, 0)
+rotation = -3.14159
+
+[node name="Car2" parent="Lanes/Lane7" index="1" instance=ExtResource("8_y7p5l")]
+position = Vector2(-192, 0)
+rotation = -3.14159
+
+[node name="Car3" parent="Lanes/Lane7" index="2" instance=ExtResource("8_y7p5l")]
+position = Vector2(-320, 0)
+rotation = -3.14159
+
+[node name="Car4" parent="Lanes/Lane7" index="3" instance=ExtResource("8_y7p5l")]
+position = Vector2(-448, 0)
+rotation = -3.14159
+
+[node name="Car5" parent="Lanes/Lane7" index="4" instance=ExtResource("8_y7p5l")]
+position = Vector2(-608, 0)
+rotation = -3.14159
+
+[node name="Car6" parent="Lanes/Lane7" index="5" instance=ExtResource("8_y7p5l")]
+position = Vector2(-736, 0)
+rotation = -3.14159
+
+[node name="Lane8" parent="Lanes" index="7" instance=ExtResource("3_5yu6c")]
+position = Vector2(-16, 272)
+direction = Vector2(1, 0)
+speed = 60.0
+
+[node name="Truck" parent="Lanes/Lane8" index="0" instance=ExtResource("10_q032p")]
+position = Vector2(640, 0)
+rotation = 3.14159
+
+[node name="Truck2" parent="Lanes/Lane8" index="1" instance=ExtResource("10_q032p")]
+position = Vector2(448, 0)
+rotation = 3.14159
+
+[node name="Truck3" parent="Lanes/Lane8" index="2" instance=ExtResource("10_q032p")]
+position = Vector2(160, 0)
+rotation = 3.14159
+
+[node name="Water" parent="." index="8"]
+visible = false
+
+[node name="CollisionShape2D" parent="Water" index="0"]
+position = Vector2(400, 128)
+shape = SubResource("RectangleShape2D_atppq")
+
+[editable path="Water"]
